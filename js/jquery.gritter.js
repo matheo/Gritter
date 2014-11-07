@@ -22,6 +22,8 @@
 	$.gritter.options = {
 		position: '',
 		class_name: '', // could be set to 'gritter-light' to use white notifications
+		class_icon: '', // css class name to add to the icon
+		icon_prefix: 'glyphicon', // icon set to use: glyphicon, fa
 		fade_in_speed: 'medium', // how fast notifications fade in
 		fade_out_speed: 1000, // how fast the notices fade out
 		time: 6000 // hang on the screen for...
@@ -107,6 +109,9 @@
 			// Basics
 			var title = params.title, 
 				text = params.text,
+				icon = params.icon || '',
+				icon_class = params.class_icon || $.gritter.options.class_icon,
+				icon_prefix = params.class_icon || $.gritter.options.icon_prefix,
 				image = params.image || '',
 				sticky = params.sticky || false,
 				item_class = params.class_name || $.gritter.options.class_name,
@@ -131,10 +136,18 @@
 			if(time_alive){
 				this._custom_timer = time_alive;
 			}
-			
-			var image_str = (image != '') ? '<img src="' + image + '" class="gritter-image" />' : '',
-				class_name = (image != '') ? 'gritter-with-image' : 'gritter-without-image';
-			
+
+			var image_str = '',
+				class_name = 'gritter-without-image';
+
+			if (icon != '') {
+			    image_str = '<i class="gritter-icon ' + icon_prefix + ' ' + icon_prefix + '-' + icon + ' ' + icon_class + '"></i>';
+			    class_name = 'gritter-with-icon';
+			} else if (image != '') {
+			    image_str = '<img src="' + image + '" class="gritter-image" />';
+			    class_name = 'gritter-with-image';
+			}
+
 			// String replacements on the template
 			if(title){
 				title = this._str_replace('[[title]]',title,this._tpl_title);

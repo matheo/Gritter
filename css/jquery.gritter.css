@@ -89,6 +89,15 @@
 	width:220px;
 	float:right;
 }
+.gritter-icon {
+	font-size: 42px;
+	text-align: center;
+	width: 1.28571429em;
+}
+.gritter-with-icon {
+	width:214px;
+	float:right;
+}
 /* for the light (white) version of the gritter notice */
 .gritter-light .gritter-item,
 .gritter-light .gritter-bottom,
